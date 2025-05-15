@@ -2,7 +2,7 @@
 Source code for creating the LDMX logo with [Typst](https://typst.app/docs/).
 
 ## Credit
-- Orignal black+white design by Nhan Tran
+- Orignal black+white design by Nhan Tran? (or Omar Moreno? or Natalia Toro?)
 - Using the [Aileron](https://www.fontsquirrel.com/fonts/aileron?filter%5Bfamily_size%5D=12) font
 
 ## Set Up
