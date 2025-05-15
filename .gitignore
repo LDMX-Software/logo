@@ -1,0 +1,6 @@
+# generated output files
+*.pdf
+*.png
+*.svg
+# cache of font we are using
+fonts/
