@@ -41,3 +41,11 @@ The output is written into a file of the same name but with a different extensio
 Specifically, I am using the Typst package [fletcher](https://typst.app/universe/package/fletcher/)
 to create this logo as a "diagram". flecter uses [CeTZ](https://typst.app/universe/package/cetz/)
 under-the-hood so that might be helpful for more fine-tuning as well.
+
+## To Do
+- [x] mimic original logo
+- [x] control over colors of the different pieces (text, particles, background)
+- [x] add prefix and suffix text
+- [ ] square page and center logo (e.g. for profile pictures)
+- [ ] different color DM from L and X (`dm_style` callback?)
+- [ ] end electron on D (like in original?)
