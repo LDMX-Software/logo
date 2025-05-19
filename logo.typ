@@ -1,5 +1,11 @@
 #import "@preview/fletcher:0.5.7": *
 
+#let circular-bend(x, y) = {
+  let R = (x*x + y*y) / (2*y);
+  let tanTheta = x / (R - y);
+  calc.atan(tanTheta)
+}
+
 /// create a single-page LDMX logo
 ///
 /// text-color: type color, default white, color of all text objects in logo
@@ -27,32 +33,28 @@
   dm-text-color: auto,
   prefix: none,
   suffix: none
-) = {
+) = context {
 
   // default dm color to bkgd color so that it "disappears"
-  if dm-color == auto {
-    dm-color = bkgd-color
-  }
+  let dm-color = if dm-color == auto {
+    bkgd-color
+  } else { dm-color }
 
   // default DM text color to text color
-  if dm-text-color == auto {
-    dm-text-color = text-color
-  }
+  let dm-text-color = if dm-text-color == auto {
+    text-color
+  } else { dm-text-color }
 
   // default electron color to text color
-  if electron-color == auto {
-    electron-color = text-color
-  }
+  let electron-color = if electron-color == auto {
+    text-color
+  } else { electron-color }
 
   set text(font: "Aileron", fill: text-color)
   set page(height: auto, width: auto, margin: 0pt, fill: none)
 
-  // magic number provided by
-  // #context {
-  //   measure(text(size:32pt)[L]).height
-  // }
-  // after choosing a font and a size
-  let text-box-height = 22.08pt
+  // requires context in order to deduce size of text
+  let text-box-height = measure(text(size: 32pt)[L]).height
 
   // other magic numbers I fiddle with to get the placements correct
 
@@ -72,9 +74,14 @@
   let min-prefix-width = 0.25cm
 
   // angle of bend in electron beam so that it looks like its following
+  let bend-angle = -28deg
   // a circular trajectory after the target and into the Dcal
   // depends on beam-endpoint and target-shift
-  let bend-angle = -28deg
+  // not working, not sure why, leaving hardcoded number rn
+  //let bend-angle = -1*circular-bend(
+  //  (target-shift.at(0)+beam-endpoint.at(0)).to-absolute().mm(),
+  //  (target-shift.at(1)+beam-endpoint.at(1)).to-absolute().mm()
+  //)
 
   diagram(
     //debug: 3, // fletcher/CeTZ draw extra markings for nodes and coordinates
