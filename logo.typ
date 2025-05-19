@@ -96,7 +96,7 @@
     node(
       (0,0),
       if prefix == none [] else if type(prefix) == str {
-        align(top + right, text(size: 16pt, weight: "light", prefix))
+        align(top + right, text(size: 15pt, weight: "light", prefix))
       } else {
         prefix
       },
@@ -135,7 +135,7 @@
         suffix
       } else {
         // assume just a string and we should do our default
-        align(bottom+left, text(size: 16pt, weight: "light", suffix))
+        align(bottom+left, text(size: 15pt, weight: "light", suffix))
       },
       name: <suffix>,
       shape: rect,
