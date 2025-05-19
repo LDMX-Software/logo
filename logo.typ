@@ -84,14 +84,14 @@
   //)
 
   diagram(
-    //debug: 3, // fletcher/CeTZ draw extra markings for nodes and coordinates
     spacing: 0pt, // have node bounding boxes immediately next to each other
     node-inset: 0pt, // no inset margin between interior bb and exterior bb
     node(
       (1,0),
       text(size: 32pt, weight: "thin")[L],
       shape: rect,
-      name: <L>
+      name: <L>,
+      layer: 1
     ),
     node(
       (0,0),
