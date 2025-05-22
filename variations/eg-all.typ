@@ -1,4 +1,4 @@
-#import "../logo.typ": logo
+#import "/logo.typ": logo
 #logo(
   prefix: "pre",
   suffix: "post"

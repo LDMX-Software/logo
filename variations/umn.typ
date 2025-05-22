@@ -1,4 +1,4 @@
-#import "../logo.typ": logo
+#import "/logo.typ": logo
 #let umn-maroon = rgb(122,0,5)
 #let umn-lightgold = rgb(255,215,95)
 #let umn-gold = rgb(255,204,51)

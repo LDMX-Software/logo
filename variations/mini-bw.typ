@@ -1,2 +1,2 @@
-#import "../logo.typ": logo
+#import "/logo.typ": logo
 #logo(prefix: "mini")

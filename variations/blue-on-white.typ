@@ -1,4 +1,4 @@
-#import "../logo.typ": logo
+#import "/logo.typ": logo
 #logo(
   text-color: black,
   dm-text-color: blue,
