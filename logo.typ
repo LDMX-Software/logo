@@ -16,6 +16,10 @@
 /// dm-text-color: type color, default to text-color, color of the letters D and M in LDMX in logo
 /// prefix: extra text to include in front of LDMX
 /// suffix: extra text to be included after LDMX
+/// page-args: how to construct the page around the logo, default is no page
+///  none or auto makes the page the same size and shape as the logo
+///  "square" makes the page a square with the side length determined by the width of the logo
+///  a dictionary is provided directly to `set page` before displaying the logo for customization
 ///
 /// For prefix and suffix, if a string is provided, then some default formatting
 /// is applied. You can customize this formatting by providing the content yourself
@@ -32,7 +36,8 @@
   dm-color: auto,
   dm-text-color: auto,
   prefix: none,
-  suffix: none
+  suffix: none,
+  page-args: auto
 ) = context {
 
   // default dm color to bkgd color so that it "disappears"
@@ -51,7 +56,6 @@
   } else { electron-color }
 
   set text(font: "Aileron", fill: text-color)
-  set page(height: auto, width: auto, margin: 0pt, fill: none)
 
   // requires context in order to deduce size of text
   let text-box-height = measure(text(size: 32pt)[L]).height
@@ -83,7 +87,7 @@
   //  (target-shift.at(1)+beam-endpoint.at(1)).to-absolute().mm()
   //)
 
-  diagram(
+  let the_logo = diagram(
     spacing: 0pt, // have node bounding boxes immediately next to each other
     node-inset: 0pt, // no inset margin between interior bb and exterior bb
     node(
@@ -182,4 +186,18 @@
       layer: 1
     ),
   )
+
+  if page-args == auto or page-args == none {
+    set page(height: auto, width: auto, margin: 0pt, fill: none)
+    the_logo
+  } else if page-args == "square" {
+    let side = measure(the_logo).width
+    set page(height: side, width: side, margin: 0pt, fill: bkgd-color)
+    align(center+horizon, the_logo)
+  } else if type(page-args) == dictionary {
+    set page(..page-args)
+    align(center+horizon, the_logo)
+  } else {
+    panic(repr(page-args)+" is not auto, "+repr("square")+", or a dictionary")
+  }
 }
