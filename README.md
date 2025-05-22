@@ -46,6 +46,6 @@ under-the-hood so that might be helpful for more fine-tuning as well.
 - [x] mimic original logo
 - [x] control over colors of the different pieces (text, particles, background)
 - [x] add prefix and suffix text
-- [ ] square page and center logo (e.g. for profile pictures)
+- [x] square page and center logo (e.g. for profile pictures)
 - [x] different color DM from L and X (`dm-text-color` argument)
 - [x] end electron on D (like in original?)
