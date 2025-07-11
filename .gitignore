@@ -4,3 +4,4 @@
 *.svg
 # cache of font we are using
 fonts/
+.DS_Store
