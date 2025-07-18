@@ -38,3 +38,19 @@ print-png variation="bw": (_print variation "--format png --ppi 300")
 
 # print a SVG logo
 print-svg variation="bw": (_print variation "--format svg")
+
+# print all types of all variations
+_print-all:
+    #!/bin/bash
+    set -o nounset
+    set -o errexit
+    for type in pdf png svg; do
+      for varfile in variations/*.typ; do
+        varname="$(basename --suffix=.typ "${varfile}")"
+        just print-${type} ${varname}
+      done
+    done
+
+# make a draft release with all the current variations built and attached
+release: _print-all
+    gh release create --draft --generate-notes "$(date +"%Y.%m.%d")" variations/*.png variations/*.pdf variations/*.svg
