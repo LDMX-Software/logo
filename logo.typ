@@ -37,6 +37,7 @@
   dm-text-color: auto,
   prefix: none,
   suffix: none,
+  un: none, // For adding the "un" in LunDMX
   page-args: auto
 ) = context {
 
@@ -70,6 +71,7 @@
   // point that electron should stop relative to target
   // ends in the upper left corner of the D as if the D is the calorimeters
   // depends on the font and size
+  //let beam-endpoint = (0.7cm, +0.35cm)
   let beam-endpoint = (0.7cm, +0.35cm)
 
   // minimum prefix width so there is a horizontal line incident
@@ -98,18 +100,30 @@
       layer: 1
     ),
     node(
-      (0,0),
-      if prefix == none [] else if type(prefix) == str {
-        align(top + right, text(size: 15pt, weight: "light", prefix))
+      (1.07,0.4),
+      if type( un ) == content or un == none {
+        // Assume user knows what they are doing 
+        un
       } else {
-        prefix
+        text(size: 12pt, weight: "light", un )
       },
-      height: text-box-height,
-      width: if prefix == none { min-prefix-width } else { auto },
-      name: <prefix>
+      shape: rect,
+      name: <un>,
+      layer: 1
     ),
     node(
-      (rel: target-shift, to: <L>),
+      (0,0),
+      if prefix == none [] else if type(prefix) == str {
+      align(top + right, text(size: 15pt, weight: "light", prefix))
+    } else {
+      prefix
+    },
+    height: text-box-height,
+    width: if prefix == none { min-prefix-width } else { auto },
+    name: <prefix>
+  ),
+  node(
+    (rel: target-shift, to: <L>),
       name: <target>
     ),
     node(
@@ -133,6 +147,7 @@
       shape: rect,
     ),
     node(
+
       (4,0),
       if type(suffix) == content or suffix == none {
         // assume user knows what they are doing
