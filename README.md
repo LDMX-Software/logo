@@ -6,7 +6,7 @@ Source code for creating the LDMX logo with [Typst](https://typst.app/docs/).
 - Using the [Aileron](https://www.fontsquirrel.com/fonts/aileron?filter%5Bfamily_size%5D=12) font
 
 ## Set Up
-Automations run with `just` command here use the [Just system](https://just.systems). Please consider installing Just first. 
+Automations run with `just` command here use the [Just system](https://just.systems). Please consider installing Just first. You will also need `wget` (see eg [this gist](https://gist.github.com/scisco/4c63a2659a6ea33eb987)). 
 
 #### Install `typst`
 There are a bunch of ways to do this, so I'm just going to refer you to
