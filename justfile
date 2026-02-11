@@ -24,17 +24,17 @@ typst CMD *ARGS:
 watch *ARGS: (typst "watch" "test.typ" ARGS)
 
 # private print to avoid repeating myself
-_print variation *ARGS: && (typst "compile" "tests/"+variation+"/test.typ" ARGS)
-    mkdir -p variations
+_print variation ext *ARGS: && (typst "compile" "tests/"+variation+"/test.typ" "variations/"+variation+ext ARGS)
+    @mkdir -p variations
 
 # print a PDF logo
-print-pdf variation="bw": (_print variation "--format=pdf")
+print-pdf variation="bw": (_print variation ".pdf")
 
 # print a PNG logo
-print-png variation="bw": (_print variation "--format png --ppi 300")
+print-png variation="bw": (_print variation ".png" "--ppi 300")
 
 # print a SVG logo
-print-svg variation="bw": (_print variation "--format svg")
+print-svg variation="bw": (_print variation ".svg")
 
 # print all types of all variations
 _print-all:
