@@ -21,26 +21,32 @@ There are a bunch of ways to do this, so I'm just going to refer you to
 just install-font path/to/aileron.zip
 ```
 
-## Development
-```
-just watch
-```
-This will compile (and re-compile) `test.typ` as you edit it or `logo.typ` and produce
-the multi-page `test.pdf` where each page is a different version of the logo.
-I would suggest opening `test.pdf` with "Continuous Mode" in your PDF viewer so you can
-see multiple logo versions at once.
+#### Install tytanic (Development)
+If you wish to develop the central `logo.typ` file (to add some additional feature
+for example), please [install tytanic](https://typst-community.github.io/tytanic/quickstart/install.html)
+which is used here to organize the different variations and make sure edits to
+the `logo.typ` file do not alter variations already in use (or at least we know
+that the logo has changed).
 
-### Adding a New Variation
-There are a few examples already in the [variations](variations) directory,
-so that should get you started. Please also include your variation in [test.typ](test.typ)
-so that it can be rendered with the others while the parent function is being developed.
+## Development
+- Start a new template logo variation with `just new-variation NAME`
+- Edit the file template now located at `tests/NAME/test.typ`
+- Update the test reference with `just tt update`
+  - View the logo at `tests/NAME/ref/1.png`
+- `git add tests/NAME` when you are happy with the new logo variation
+
+The other "tests" are just the other logo variations and should always "pass"
+unless you are editing `logo.typ` itself. Edits to `logo.typ` that change
+the logo variations should be considered breaking changes and should be
+done with care.
 
 ## Usage
-You can print a PDF, PNG, or SVG of any of the variations in [variations](variations) with
+You can print a PDF, PNG, or SVG of [any of the variations](tests) with
 ```
 just print-{pdf,png,svg} <variation>
 ```
-The output is written into a file of the same name but with a different extension.
+The output is written into a file of the same name (but with the correct extension)
+in the `variations` directory.
 
 ## Implementation
 Specifically, I am using the Typst package [fletcher](https://typst.app/universe/package/fletcher/)

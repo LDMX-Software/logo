@@ -1,7 +1,11 @@
 # generated output files
+variations
 *.pdf
-*.png
 *.svg
+*.png
+
 # cache of font we are using
 fonts/
+
+# Mac file explorer file
 .DS_Store

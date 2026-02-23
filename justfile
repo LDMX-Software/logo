@@ -24,16 +24,21 @@ typst CMD *ARGS:
 watch *ARGS: (typst "watch" "test.typ" ARGS)
 
 # private print to avoid repeating myself
-_print variation *ARGS: (typst "compile" "variations/"+variation+".typ" ARGS)
+_print variation ext *ARGS: && (typst "compile" "tests/"+variation+"/test.typ" "variations/"+variation+ext ARGS)
+    @mkdir -p variations
 
 # print a PDF logo
-print-pdf variation="bw": (_print variation "--format=pdf")
+print-pdf variation="bw": (_print variation ".pdf")
 
 # print a PNG logo
-print-png variation="bw": (_print variation "--format png --ppi 300")
+print-png variation="bw": (_print variation ".png" "--ppi 300")
 
 # print a SVG logo
-print-svg variation="bw": (_print variation "--format svg")
+print-svg variation="bw": (_print variation ".svg")
+
+# start a new variation
+new-variation name: (tt "new" name)
+    cp tests/bw/test.typ tests/{{name}}/test.typ
 
 # print all types of all variations
 _print-all:
@@ -41,12 +46,25 @@ _print-all:
     set -o nounset
     set -o errexit
     for type in pdf png svg; do
-      for varfile in variations/*.typ; do
-        varname="$(basename --suffix=.typ "${varfile}")"
+      for varfile in tests/*/; do
+        varname="$(basename "${varfile}")"
         just print-${type} ${varname}
       done
     done
 
 # make a draft release with all the current variations built and attached
 release: _print-all
-    gh release create --draft --generate-notes "$(date +"%Y.%m.%d")" variations/*.png variations/*.pdf variations/*.svg
+    gh release create \
+      --draft \
+      --generate-notes \
+      "$(date +"%Y.%m.%d")" \
+      variations/*.png \
+      variations/*.pdf \
+      variations/*.svg
+
+# generic tytanic command with our custom font-path and root
+tt *args:
+    tt {{ typst_args }} {{ args }}
+
+# run the tytanic tests to ensure no inadvertent logo changes
+test: (tt "run")
