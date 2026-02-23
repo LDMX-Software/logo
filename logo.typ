@@ -16,6 +16,7 @@
 /// dm-text-color: type color, default to text-color, color of the letters D and M in LDMX in logo
 /// prefix: extra text to include in front of LDMX
 /// suffix: extra text to be included after LDMX
+/// un: for adding "un" in LunDMX above horizontal bar of the L
 /// page-args: how to construct the page around the logo, default is no page
 ///  none or auto makes the page the same size and shape as the logo
 ///  "square" makes the page a square with the side length determined by the width of the logo
@@ -37,6 +38,7 @@
   dm-text-color: auto,
   prefix: none,
   suffix: none,
+  un: none,
   page-args: auto
 ) = context {
 
@@ -95,6 +97,18 @@
       text(size: 32pt, weight: "thin")[L],
       shape: rect,
       name: <L>,
+      layer: 1
+    ),
+    node(
+      (1.07,0.4),
+      if type( un ) == content or un == none {
+        // Assume user knows what they are doing 
+        un
+      } else {
+        text(size: 12pt, weight: "light", un )
+      },
+      shape: rect,
+      name: <un>,
       layer: 1
     ),
     node(
