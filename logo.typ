@@ -16,6 +16,7 @@
 /// dm-text-color: type color, default to text-color, color of the letters D and M in LDMX in logo
 /// prefix: extra text to include in front of LDMX
 /// suffix: extra text to be included after LDMX
+/// un: for adding "un" in LunDMX above horizontal bar of the L
 /// page-args: how to construct the page around the logo, default is no page
 ///  none or auto makes the page the same size and shape as the logo
 ///  "square" makes the page a square with the side length determined by the width of the logo
@@ -37,7 +38,7 @@
   dm-text-color: auto,
   prefix: none,
   suffix: none,
-  un: none, // For adding the "un" in LunDMX
+  un: none,
   page-args: auto
 ) = context {
 
@@ -71,7 +72,6 @@
   // point that electron should stop relative to target
   // ends in the upper left corner of the D as if the D is the calorimeters
   // depends on the font and size
-  //let beam-endpoint = (0.7cm, +0.35cm)
   let beam-endpoint = (0.7cm, +0.35cm)
 
   // minimum prefix width so there is a horizontal line incident
@@ -114,16 +114,16 @@
     node(
       (0,0),
       if prefix == none [] else if type(prefix) == str {
-      align(top + right, text(size: 15pt, weight: "light", prefix))
-    } else {
-      prefix
-    },
-    height: text-box-height,
-    width: if prefix == none { min-prefix-width } else { auto },
-    name: <prefix>
-  ),
-  node(
-    (rel: target-shift, to: <L>),
+        align(top + right, text(size: 15pt, weight: "light", prefix))
+      } else {
+        prefix
+      },
+      height: text-box-height,
+      width: if prefix == none { min-prefix-width } else { auto },
+      name: <prefix>
+    ),
+    node(
+      (rel: target-shift, to: <L>),
       name: <target>
     ),
     node(
@@ -147,7 +147,6 @@
       shape: rect,
     ),
     node(
-
       (4,0),
       if type(suffix) == content or suffix == none {
         // assume user knows what they are doing
