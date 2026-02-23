@@ -7,13 +7,18 @@ Source code for creating the LDMX logo with [Typst](https://typst.app/docs/).
 
 ## Set Up
 
+#### Install `just`
+`just` is used to share common recipes similar to how we use it for ldmx-sw development.
+
 #### Install `typst`
 There are a bunch of ways to do this, so I'm just going to refer you to
 [their installation documentation](https://github.com/typst/typst?tab=readme-ov-file#installation).
 
 #### Install Aileron Font
+- Download [Aileron Font](https://www.fontsquirrel.com/fonts/download/aileron)
+- Install into this repo for development
 ```
-just install-fonts
+just install-font path/to/aileron.zip
 ```
 
 ## Development
