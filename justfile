@@ -1,23 +1,19 @@
 _default:
     @just --list --justfile {{ justfile() }}
 
-aileron_url := "https://www.fontsquirrel.com/fonts/download/aileron"
+fonts_path := source_directory() / "fonts"
 
-_install_font URL:
+# install necessary fonts into 'fonts/' directory
+[no-cd]
+install-font zip_path:
     #!/bin/sh
     set -o errexit
     set -o nounset
-    dir=$(mktemp -d)
-    wget -O "${dir}/font.zip" "{{ URL }}"
-    mkdir -p fonts
-    cd fonts
-    unzip "${dir}/font.zip"
-    rm -r "${dir}"
+    mkdir -p {{ fonts_path }}
+    cd {{ fonts_path }}
+    unzip ${OLDPWD}/{{ zip_path }}
 
-# install necessary fonts into 'fonts/' directory
-install-fonts: (_install_font aileron_url)
 
-fonts_path := source_directory() / "fonts"
 typst_args := "--font-path " + fonts_path +  " --root " + source_directory() 
 
 # generic typst command with additional font path
