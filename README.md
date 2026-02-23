@@ -6,10 +6,9 @@ Source code for creating the LDMX logo with [Typst](https://typst.app/docs/).
 - Using the [Aileron](https://www.fontsquirrel.com/fonts/aileron?filter%5Bfamily_size%5D=12) font
 
 ## Set Up
-Automations run with `just` command here use the [Just system](https://just.systems). Please consider installing Just first. You will also need `wget` (see eg [this gist](https://gist.github.com/scisco/4c63a2659a6ea33eb987)). 
 
 #### Install `just`
-`just` is used to share common recipes similar to how we use it for ldmx-sw development.
+`just` is used to share common recipes similar to how we use it [for ldmx-sw development](https://ldmx-software.github.io/developing/getting-started.html#install-just).
 
 #### Install `typst`
 There are a bunch of ways to do this, so I'm just going to refer you to
@@ -47,11 +46,3 @@ The output is written into a file of the same name but with a different extensio
 Specifically, I am using the Typst package [fletcher](https://typst.app/universe/package/fletcher/)
 to create this logo as a "diagram". flecter uses [CeTZ](https://typst.app/universe/package/cetz/)
 under-the-hood so that might be helpful for more fine-tuning as well.
-
-## To Do
-- [x] mimic original logo
-- [x] control over colors of the different pieces (text, particles, background)
-- [x] add prefix and suffix text
-- [x] square page and center logo (e.g. for profile pictures)
-- [x] different color DM from L and X (`dm-text-color` argument)
-- [x] end electron on D (like in original?)
