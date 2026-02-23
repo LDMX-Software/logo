@@ -36,6 +36,10 @@ print-png variation="bw": (_print variation ".png" "--ppi 300")
 # print a SVG logo
 print-svg variation="bw": (_print variation ".svg")
 
+# start a new variation
+new-variation name: (tt "new" name)
+    cp tests/bw/test.typ tests/{{name}}/test.typ
+
 # print all types of all variations
 _print-all:
     #!/bin/bash
